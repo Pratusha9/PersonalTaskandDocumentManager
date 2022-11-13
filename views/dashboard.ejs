@@ -1,0 +1,89 @@
+<html>
+    <head>
+        <title>Tasks</title>
+        <link rel="stylesheet" href="/css/home.css">
+    </head>
+
+    <body>
+
+        <div class="nav">
+            <input type="checkbox" id="nav-check">
+            <div class="nav-header">
+              <div class="nav-title">
+                Welcome <%= profile.name %>
+              </div>
+            </div>
+            <div class="nav-btn">
+              <label for="nav-check">
+                <span></span>
+                <span></span>
+                <span></span>
+              </label>
+            </div>
+            
+            <div class="nav-links">
+                <a href="/tasks">Tasks</a>
+              <a href="/materials">Materials</a>
+              <a href="/logout">Logout</a>
+            </div>
+          </div>
+
+<br><br>
+          <h2 style="text-align: center;">Tasks</h2>
+          <br><br>
+          <div class="container">
+            <form action="/add/task" method="post">
+              <label for="title">Title</label>
+              <input type="text" id="title" name="title" placeholder="Title">
+          
+              <label for="dueDate">Due Date</label>
+              <input type="text" id="dueDate" name="dueDate" placeholder="Due Date">
+          
+              <label for="status">Status</label>
+              <select id="status" name="status" style="width: 70px;">
+                <option value=""></option>
+                <option value="In Progress">In Progress</option>
+                <option value="Done">Done</option>
+              </select>
+          <br><br>
+              <label for="description">Description</label>
+              <textarea id="description" name="description" placeholder="Description" style="height:200px"></textarea>
+              <button type="submit" value="Submit" onsubmit="this.form.submit()">Add</button>
+            </form>
+            <br><br><br><br><hr>
+
+
+
+              <% tasks.forEach(function(task) { %>
+              <h2>Title - <%= task.title %></h2>
+              <p>Description - <%= task.description %></p>
+              <p> Date - <%= task.dueDate %></p>
+
+              <form action="/update/status" method="post">
+                <label for="status">Status</label><br>
+                <select id="status" name="status" style="width: 70px;">
+                    <option value="<%= task.status %>"><%= task.status %></option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Done">Done</option>
+                </select>
+
+         <button type="submit" name="taskIdA" value="<%= task._id %>" onsubmit="this.form.submit()">Change</button>
+        </form>
+        <br>
+        <form action="/delete/task" method="post">
+          <button style="" type="submit" name="taskId" value="<%= task._id %>" onsubmit="this.form.submit()">Delete</button>
+      </form>
+
+<br><br><hr>
+
+
+
+               <% }) %>
+
+
+          </div>
+
+    </body>
+
+
+</html>
