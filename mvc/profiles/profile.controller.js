@@ -53,8 +53,14 @@ function loginUser (req, res) {
 }
 
 function logOutUser (req, res) {
-    req.logout();
-    res.redirect('/login');
+    req.logout(function(err){
+        if (err) {
+            return next(err);
+        } else {
+            res.redirect('/login');
+        }
+    });
+
 }
 
 async function updateProfile (req, res) {

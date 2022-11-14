@@ -52,7 +52,7 @@ mongoose.connection.on("connected", () => {
 mongoose.connection.on("disconnected", () => {
   console.log("mongoose is disconnected...")
 });
-const { Quiz, Material } = require('./mvc/index');
+const { Material } = require('./mvc/index');
 
 const upload = multer({
     storage: multerS3({
